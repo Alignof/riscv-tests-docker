@@ -12,5 +12,5 @@ RUN git clone https://github.com/riscv/riscv-tests \
     && autoconf \
     && ./configure --prefix=/opt/riscv \
     && make -j$(nproc) \
-    && make -j$(nproc) install 
-RUN mv /opt/riscv/share/riscv-tests /opt/riscv
+    && make -j$(nproc) install \
+    && mv /opt/riscv/share/riscv-tests /opt/riscv
