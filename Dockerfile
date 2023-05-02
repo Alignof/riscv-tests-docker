@@ -1,6 +1,8 @@
 FROM archlinux
 
-RUN pacman -Syyu --noconfirm autoconf automake curl python3 libmpc mpfr git gmp gawk base-devel bison flex texinfo gperf libtool patchutils bc zlib expat
+RUN pacman-key --init \
+    && pacman -Sy --noconfirm archlinux-keyring \
+    && pacman -Syyu --noconfirm autoconf automake curl python3 libmpc mpfr git gmp gawk base-devel bison flex texinfo gperf libtool patchutils bc zlib expat
 RUN git clone https://github.com/riscv/riscv-gnu-toolchain \
     && cd /riscv-gnu-toolchain \
     && ./configure --prefix=/opt/riscv && make -j$(nproc)
@@ -12,5 +14,5 @@ RUN git clone https://github.com/riscv/riscv-tests \
     && autoconf \
     && ./configure --prefix=/opt/riscv \
     && make -j$(nproc) \
-    && make -j$(nproc) install \
-    && mv /opt/riscv/share/riscv-tests /opt/riscv
+    && make -j$(nproc) install 
+RUN ln -s /opt/riscv/share/riscv-tests /opt/riscv/riscv-tests
