@@ -15,4 +15,5 @@ RUN git clone https://github.com/riscv/riscv-tests \
     && ./configure --prefix=/opt/riscv \
     && make -j$(nproc) \
     && make -j$(nproc) install 
+RUN rm -rf /riscv-gnu-toolchain /riscv-tests
 RUN ln -s /opt/riscv/share/riscv-tests /opt/riscv/riscv-tests
